@@ -18,14 +18,27 @@ public class OrdenaStrings {
 		Collections.sort(palavras);
 		System.out.println(palavras);
 		
-		Comparator<String> comparador = new ComparadorDeStringPorTamanho();
+//		Comparator<String> comparador = new ComparadorDeStringPorTamanho();
 //		Collections.sort(palavras, comparador);
-		palavras.sort(comparador);
+//		palavras.sort(comparador);
+//		System.out.println(palavras);
+		
+		palavras.sort((s1,s2) -> Integer.compare(s1.length() ,s2.length()));
 		System.out.println(palavras);
 		
-		Consumer<String> consumidor = new ConsumidorDeString();
-		palavras.forEach(consumidor);
+//		Consumer<String> consumidor = new ConsumidorDeString();
+//		palavras.forEach(consumidor);
 		
+//		palavras.forEach(new Consumer<String>() {
+//			@Override
+//			public void accept(String s) {
+//				System.out.println(s);
+//			}
+//		});
+		
+		palavras.forEach(s -> System.out.println(s));
+		
+		new Thread(() -> System.out.println("Executando um Runnable")).start();
 	}
 	
 }
