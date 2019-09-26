@@ -3,7 +3,12 @@ package com.ph.java8.streams;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamsTeste {
@@ -65,5 +70,55 @@ public class StreamsTeste {
 			  .sum()
 		  );
 		
+		System.out.println("********** Exercícios **********");
+		
+//		cursos.sort(Comparator.comparing(Curso::getAlunos));
+//		cursos.forEach(System.out::println);
+		
+//		cursos.stream()
+//			  .filter(c -> c.getAlunos() > 50)
+//			  .forEach(c -> System.out.println(c.getNome()));
+		
+//		Stream<String> nomesDosCursos = cursos.stream().map(c -> c.getNome());
+//		nomesDosCursos.forEach(System.out::println);
+		
+		cursos.stream()
+		   .filter(c -> c.getAlunos() > 50)
+		   .map(Curso::getAlunos)
+		   .forEach(System.out::println);
+		
+		Optional<Curso> optional = cursos.stream()
+			  .filter(c -> c.getAlunos() >= 100)
+			  .findAny();
+		
+		cursos.stream()
+			  .filter(c -> c.getAlunos() > 100)
+			  .findAny()
+			  .ifPresent(c -> System.out.println(c.getNome()));
+		
+//		Curso curso = optional.get();
+//		Curso curso = optional.orElse(null);
+//		System.out.println(curso.getNome());
+		
+		System.out.println("********** Coleções a partir de Streams **********");
+		
+		List<Curso> resultados = cursos.stream()
+									.filter(c -> c.getAlunos() > 100)
+									.collect(Collectors.toList());
+		resultados.forEach(System.out::println);
+		
+		Map<String, Integer> mapa = cursos.stream()
+										.filter(c -> c.getAlunos() > 100)
+										.collect(Collectors.toMap(c -> c.getNome(), c -> c.getAlunos()));
+		Optional<Curso> curso = cursos.stream()
+			  .filter(c -> c.getAlunos() > 50)
+			  .findFirst();
+		System.out.println(curso.get().getNome());
+		
+		OptionalDouble media = cursos.stream().mapToInt(c -> c.getAlunos()).average();
+		System.out.println(media);
+		
+		List<Curso> lista = cursos.stream().filter(c -> c.getAlunos() > 50).collect(Collectors.toList());
+		lista.forEach(System.out::println);
 	}
 }
