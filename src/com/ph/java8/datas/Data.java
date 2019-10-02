@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.Period;
 import java.time.YearMonth;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Data {
@@ -58,5 +59,7 @@ public class Data {
 		
 		LocalTime intervalo = LocalTime.of(12, 30);
 		System.out.println(intervalo);
+		
+		ZonedDateTime zoneTime = null;
 	}
 }
